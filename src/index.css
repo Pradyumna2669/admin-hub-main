@@ -1,0 +1,217 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* StoicOps Design System - Dark, classical, philosophical aesthetic */
+
+@layer base {
+  :root {
+    --background: 260 30% 6%;
+    --foreground: 260 10% 95%;
+
+    --card: 260 25% 10%;
+    --card-foreground: 260 10% 95%;
+
+    --popover: 260 25% 12%;
+    --popover-foreground: 260 10% 95%;
+
+    --primary: 270 60% 60%;
+    --primary-foreground: 260 10% 98%;
+
+    --secondary: 260 20% 18%;
+    --secondary-foreground: 260 10% 90%;
+
+    --muted: 260 15% 15%;
+    --muted-foreground: 260 10% 60%;
+
+    --accent: 280 70% 55%;
+    --accent-foreground: 260 10% 98%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 260 20% 20%;
+    --input: 260 20% 18%;
+    --ring: 270 60% 50%;
+
+    --radius: 0.75rem;
+
+    /* Custom StoicOps tokens */
+    --stoic-purple: 270 60% 50%;
+    --stoic-purple-light: 270 70% 65%;
+    --stoic-purple-dark: 270 50% 35%;
+    --stoic-gold: 45 80% 55%;
+    --stoic-marble: 260 5% 85%;
+    --stoic-shadow: 260 30% 4%;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(270 60% 45%), hsl(280 70% 55%));
+    --gradient-hero: linear-gradient(180deg, hsl(260 30% 8%) 0%, hsl(270 40% 12%) 50%, hsl(260 30% 6%) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(260 25% 12%), hsl(260 25% 8%));
+    --gradient-glow: radial-gradient(circle at center, hsl(270 60% 50% / 0.15), transparent 70%);
+
+    /* Shadows */
+    --shadow-sm: 0 2px 8px hsl(260 30% 4% / 0.3);
+    --shadow-md: 0 4px 16px hsl(260 30% 4% / 0.4);
+    --shadow-lg: 0 8px 32px hsl(260 30% 4% / 0.5);
+    --shadow-glow: 0 0 40px hsl(270 60% 50% / 0.2);
+
+    --sidebar-background: 260 25% 8%;
+    --sidebar-foreground: 260 10% 90%;
+    --sidebar-primary: 270 60% 60%;
+    --sidebar-primary-foreground: 260 10% 98%;
+    --sidebar-accent: 260 20% 15%;
+    --sidebar-accent-foreground: 260 10% 90%;
+    --sidebar-border: 260 20% 18%;
+    --sidebar-ring: 270 60% 50%;
+  }
+
+  .dark {
+    --background: 260 30% 6%;
+    --foreground: 260 10% 95%;
+
+    --card: 260 25% 10%;
+    --card-foreground: 260 10% 95%;
+
+    --popover: 260 25% 12%;
+    --popover-foreground: 260 10% 95%;
+
+    --primary: 270 60% 60%;
+    --primary-foreground: 260 10% 98%;
+
+    --secondary: 260 20% 18%;
+    --secondary-foreground: 260 10% 90%;
+
+    --muted: 260 15% 15%;
+    --muted-foreground: 260 10% 60%;
+
+    --accent: 280 70% 55%;
+    --accent-foreground: 260 10% 98%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 260 20% 20%;
+    --input: 260 20% 18%;
+    --ring: 270 60% 50%;
+    
+    --sidebar-background: 260 25% 8%;
+    --sidebar-foreground: 260 10% 90%;
+    --sidebar-primary: 270 60% 60%;
+    --sidebar-primary-foreground: 260 10% 98%;
+    --sidebar-accent: 260 20% 15%;
+    --sidebar-accent-foreground: 260 10% 90%;
+    --sidebar-border: 260 20% 18%;
+    --sidebar-ring: 270 60% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Cinzel', serif;
+  }
+}
+
+@layer components {
+  .stoic-card {
+    @apply bg-card border border-border rounded-lg;
+    background: var(--gradient-card);
+    box-shadow: var(--shadow-md);
+  }
+
+  .stoic-input {
+    @apply bg-input border border-border rounded-md px-4 py-2 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring;
+  }
+
+  .stoic-button-primary {
+    @apply px-6 py-2.5 rounded-md font-medium text-primary-foreground transition-all duration-200;
+    background: var(--gradient-primary);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .stoic-button-primary:hover {
+    box-shadow: var(--shadow-glow);
+    transform: translateY(-1px);
+  }
+
+  .stoic-glow {
+    position: relative;
+  }
+
+  .stoic-glow::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: var(--gradient-primary);
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+    filter: blur(12px);
+  }
+
+  .stoic-glow:hover::before {
+    opacity: 0.5;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.5s ease-out forwards;
+  }
+
+  .animate-pulse-glow {
+    animation: pulseGlow 2s ease-in-out infinite;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px hsl(270 60% 50% / 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px hsl(270 60% 50% / 0.5);
+  }
+}

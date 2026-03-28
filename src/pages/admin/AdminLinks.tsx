@@ -55,6 +55,24 @@ const AdminLinks: React.FC = () => {
         .single();
 
       if (error) throw error;
+
+      // Log activity for link creation
+      if (data) {
+        await supabase.from('activity_logs').insert({
+          user_id: user?.id,
+          action: 'link_created',
+          entity_type: 'link',
+          entity_id: data.id,
+          details: {
+            url: data.url,
+            website_name: data.website_name,
+            promotion_content: data.promotion_content,
+            created_by: user?.email || user?.id,
+            created_at: data.created_at,
+          },
+        });
+      }
+
       return data;
     },
     onSuccess: () => {
@@ -95,7 +113,7 @@ const AdminLinks: React.FC = () => {
   };
 
   return (
-    <DashboardLayout isAdmin>
+    <DashboardLayout>
       <div className="space-y-6">
         {/* Header */}
         <div className="flex items-center justify-between">

@@ -1,1 +1,22 @@
-project_id = "tnkwvwfjboazbjlyvauz"
+project_id = "sbvnwbcpgdcwulwsdnab"
+
+[functions.check-account-exists]
+verify_jwt = false
+
+[functions.send-test-push]
+verify_jwt = false
+
+[functions.send-chat-push]
+verify_jwt = false
+
+[functions.send-task-push]
+verify_jwt = false
+
+[functions.orders-webhook]
+verify_jwt = false
+
+[functions.sync-discord-verification]
+verify_jwt = false
+
+[functions.update-worker-karma]
+verify_jwt = false

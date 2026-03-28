@@ -1,0 +1,4 @@
+## IMPORTANT
+## Disable platform-level JWT verification so browser CORS preflight (OPTIONS)
+## isn't rejected before our handler runs.
+verify_jwt = true

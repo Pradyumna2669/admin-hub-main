@@ -1,0 +1,4 @@
+## Disable platform-level JWT verification so browser CORS preflight (OPTIONS)
+## isn't rejected before our handler runs. We validate Authorization inside
+## the function and return proper CORS headers ourselves.
+verify_jwt = false

@@ -14,8 +14,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        heading: ['Cinzel', 'serif'],
-        body: ['Inter', 'sans-serif'],
+        heading: ["Poppins", "sans-serif"],
+        body: ["Poppins", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -98,6 +98,7 @@ export default {
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
+        "spin-slow": "spin 35s linear infinite",
         "accordion-up": "accordion-up 0.2s ease-out",
         "fade-in": "fade-in 0.5s ease-out forwards",
         "slide-up": "slide-up 0.5s ease-out forwards",

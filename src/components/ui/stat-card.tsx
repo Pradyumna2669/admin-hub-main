@@ -21,7 +21,7 @@ export const StatCard: React.FC<StatCardProps> = ({
   className,
 }) => {
   return (
-    <div className={cn('stoic-card p-6', className)}>
+    <div className={cn('stoic-card overflow-hidden p-6', className)}>
       <div className="flex items-start justify-between">
         <div>
           <p className="text-sm text-muted-foreground">{title}</p>
@@ -39,7 +39,7 @@ export const StatCard: React.FC<StatCardProps> = ({
             </p>
           )}
         </div>
-        <div className="p-3 rounded-lg bg-primary/10">
+        <div className="rounded-2xl border border-primary/15 bg-primary/10 p-3 shadow-[0_0_24px_hsl(var(--primary)/0.12)]">
           <Icon className="h-6 w-6 text-primary" />
         </div>
       </div>

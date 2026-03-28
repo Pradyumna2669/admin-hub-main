@@ -1,110 +1,143 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+.spline-watermark-hider {
+  /* Some users add a pseudo-element overlay if display none fails */
+  box-shadow: inset 0 -40px 0 0 #0c1324; /* matches background */
+}
+
+/* Hard target the Spline watermark logo linked to spline.design */
+a[href*="spline.design"] {
+    display: none !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    visibility: hidden !important;
+}
+
+html {
+  scroll-behavior: smooth;
+}
 /* StoicOps Design System - Dark, classical, philosophical aesthetic */
 
 @layer base {
   :root {
-    --background: 260 30% 6%;
-    --foreground: 260 10% 95%;
+    --background: 205 60% 97%;
+    --foreground: 220 35% 16%;
 
-    --card: 260 25% 10%;
-    --card-foreground: 260 10% 95%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 35% 16%;
 
-    --popover: 260 25% 12%;
-    --popover-foreground: 260 10% 95%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 35% 16%;
 
-    --primary: 270 60% 60%;
-    --primary-foreground: 260 10% 98%;
+    --primary: 198 88% 44%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 260 20% 18%;
-    --secondary-foreground: 260 10% 90%;
+    --secondary: 210 40% 94%;
+    --secondary-foreground: 220 30% 22%;
 
-    --muted: 260 15% 15%;
-    --muted-foreground: 260 10% 60%;
+    --muted: 205 45% 92%;
+    --muted-foreground: 218 18% 42%;
 
-    --accent: 280 70% 55%;
-    --accent-foreground: 260 10% 98%;
+    --accent: 35 92% 56%;
+    --accent-foreground: 220 35% 14%;
 
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 260 20% 20%;
-    --input: 260 20% 18%;
-    --ring: 270 60% 50%;
+    --border: 210 28% 84%;
+    --input: 210 32% 92%;
+    --ring: 198 88% 44%;
 
     --radius: 0.75rem;
 
     /* Custom StoicOps tokens */
-    --stoic-purple: 270 60% 50%;
-    --stoic-purple-light: 270 70% 65%;
-    --stoic-purple-dark: 270 50% 35%;
-    --stoic-gold: 45 80% 55%;
-    --stoic-marble: 260 5% 85%;
-    --stoic-shadow: 260 30% 4%;
+    --stoic-purple: 198 88% 44%;
+    --stoic-purple-light: 191 90% 58%;
+    --stoic-purple-dark: 211 46% 36%;
+    --stoic-gold: 35 92% 56%;
+    --stoic-marble: 208 30% 91%;
+    --stoic-shadow: 213 37% 32%;
 
     /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(270 60% 45%), hsl(280 70% 55%));
-    --gradient-hero: linear-gradient(180deg, hsl(260 30% 8%) 0%, hsl(270 40% 12%) 50%, hsl(260 30% 6%) 100%);
-    --gradient-card: linear-gradient(145deg, hsl(260 25% 12%), hsl(260 25% 8%));
-    --gradient-glow: radial-gradient(circle at center, hsl(270 60% 50% / 0.15), transparent 70%);
+    --gradient-primary: linear-gradient(135deg, hsl(198 88% 44%), hsl(218 74% 56%));
+    --gradient-hero: radial-gradient(circle at top left, hsl(198 88% 44% / 0.12), transparent 34%), radial-gradient(circle at top right, hsl(35 92% 56% / 0.12), transparent 28%), linear-gradient(180deg, hsl(205 70% 98%) 0%, hsl(204 56% 95%) 46%, hsl(210 54% 92%) 100%);
+    --gradient-card: linear-gradient(160deg, hsl(0 0% 100% / 0.92), hsl(205 45% 96% / 0.98));
+    --gradient-glow: radial-gradient(circle at center, hsl(198 88% 44% / 0.14), transparent 70%);
 
     /* Shadows */
-    --shadow-sm: 0 2px 8px hsl(260 30% 4% / 0.3);
-    --shadow-md: 0 4px 16px hsl(260 30% 4% / 0.4);
-    --shadow-lg: 0 8px 32px hsl(260 30% 4% / 0.5);
-    --shadow-glow: 0 0 40px hsl(270 60% 50% / 0.2);
+    --shadow-sm: 0 10px 24px hsl(212 28% 58% / 0.14);
+    --shadow-md: 0 18px 40px hsl(212 28% 58% / 0.2);
+    --shadow-lg: 0 26px 60px hsl(212 28% 58% / 0.24);
+    --shadow-glow: 0 0 40px hsl(198 88% 44% / 0.14);
 
-    --sidebar-background: 260 25% 8%;
-    --sidebar-foreground: 260 10% 90%;
-    --sidebar-primary: 270 60% 60%;
-    --sidebar-primary-foreground: 260 10% 98%;
-    --sidebar-accent: 260 20% 15%;
-    --sidebar-accent-foreground: 260 10% 90%;
-    --sidebar-border: 260 20% 18%;
-    --sidebar-ring: 270 60% 50%;
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 220 35% 18%;
+    --sidebar-primary: 198 88% 44%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 205 50% 94%;
+    --sidebar-accent-foreground: 220 35% 18%;
+    --sidebar-border: 210 28% 86%;
+    --sidebar-ring: 198 88% 44%;
   }
 
   .dark {
-    --background: 260 30% 6%;
-    --foreground: 260 10% 95%;
+    --background: 230 38% 6%;
+    --foreground: 210 20% 96%;
 
-    --card: 260 25% 10%;
-    --card-foreground: 260 10% 95%;
+    --card: 232 32% 10%;
+    --card-foreground: 210 20% 96%;
 
-    --popover: 260 25% 12%;
-    --popover-foreground: 260 10% 95%;
+    --popover: 214 38% 14%;
+    --popover-foreground: 210 20% 96%;
 
-    --primary: 270 60% 60%;
-    --primary-foreground: 260 10% 98%;
+    --primary: 270 78% 62%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 260 20% 18%;
-    --secondary-foreground: 260 10% 90%;
+    --secondary: 217 31% 20%;
+    --secondary-foreground: 210 20% 92%;
 
-    --muted: 260 15% 15%;
-    --muted-foreground: 260 10% 60%;
+    --muted: 218 26% 17%;
+    --muted-foreground: 210 16% 68%;
 
-    --accent: 280 70% 55%;
-    --accent-foreground: 260 10% 98%;
+    --accent: 38 92% 62%;
+    --accent-foreground: 215 35% 12%;
 
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 260 20% 20%;
-    --input: 260 20% 18%;
-    --ring: 270 60% 50%;
+    --border: 216 28% 24%;
+    --input: 216 28% 18%;
+    --ring: 270 78% 62%;
+
+    --stoic-purple: 270 78% 62%;
+    --stoic-purple-light: 278 82% 72%;
+    --stoic-purple-dark: 258 58% 32%;
+    --stoic-gold: 38 92% 62%;
+    --stoic-marble: 210 12% 86%;
+    --stoic-shadow: 220 45% 5%;
+
+    --gradient-primary: linear-gradient(135deg, hsl(270 82% 64%), hsl(292 76% 60%));
+    --gradient-hero: radial-gradient(circle at top left, hsl(270 82% 64% / 0.28), transparent 30%), radial-gradient(circle at 82% 10%, hsl(38 92% 62% / 0.12), transparent 24%), radial-gradient(circle at 50% 100%, hsl(288 76% 60% / 0.1), transparent 28%), linear-gradient(180deg, hsl(252 34% 10%) 0%, hsl(246 32% 7%) 48%, hsl(239 30% 5%) 100%);
+    --gradient-card: linear-gradient(160deg, hsl(255 24% 16% / 0.96), hsl(245 28% 10% / 0.99));
+    --gradient-glow: radial-gradient(circle at center, hsl(270 82% 64% / 0.24), transparent 70%);
+
+    --shadow-sm: 0 12px 28px hsl(236 42% 4% / 0.22);
+    --shadow-md: 0 22px 48px hsl(236 42% 4% / 0.34);
+    --shadow-lg: 0 34px 72px hsl(236 42% 4% / 0.42);
+    --shadow-glow: 0 0 52px hsl(270 82% 64% / 0.24);
     
-    --sidebar-background: 260 25% 8%;
-    --sidebar-foreground: 260 10% 90%;
-    --sidebar-primary: 270 60% 60%;
-    --sidebar-primary-foreground: 260 10% 98%;
-    --sidebar-accent: 260 20% 15%;
-    --sidebar-accent-foreground: 260 10% 90%;
-    --sidebar-border: 260 20% 18%;
-    --sidebar-ring: 270 60% 50%;
+    --sidebar-background: 216 42% 9%;
+    --sidebar-foreground: 210 18% 92%;
+    --sidebar-primary: 270 78% 62%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 217 30% 16%;
+    --sidebar-accent-foreground: 210 18% 92%;
+    --sidebar-border: 216 28% 20%;
+    --sidebar-ring: 270 78% 62%;
   }
 }
 
@@ -113,21 +146,188 @@
     @apply border-border;
   }
 
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) hsl(var(--background));
+  }
+
+  html::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+  }
+
+  html::-webkit-scrollbar-track {
+    background:
+      linear-gradient(180deg, hsl(var(--background)), hsl(var(--card)));
+  }
+
+  html::-webkit-scrollbar-thumb {
+    background:
+      linear-gradient(180deg, hsl(var(--muted)), hsl(var(--border)));
+    border: 2px solid hsl(var(--background));
+    border-radius: 9999px;
+    background-clip: padding-box;
+  }
+
+  html::-webkit-scrollbar-thumb:hover {
+    background:
+      linear-gradient(180deg, hsl(var(--primary) / 0.75), hsl(var(--border)));
+    border: 2px solid hsl(var(--background));
+    background-clip: padding-box;
+  }
+
+  html::-webkit-scrollbar-corner {
+    background: hsl(var(--background));
+  }
+
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Poppins', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji', sans-serif;
+    background-image: var(--gradient-hero);
+    background-attachment: fixed;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Cinzel', serif;
+    font-family: 'Poppins', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji', sans-serif;
   }
 }
 
 @layer components {
   .stoic-card {
-    @apply bg-card border border-border rounded-lg;
-    background: var(--gradient-card);
-    box-shadow: var(--shadow-md);
+    @apply bg-white/60 dark:bg-[#131722]/80 backdrop-blur-2xl border border-slate-200 dark:border-white/10 rounded-2xl shadow-xl;
+    position: relative;
+    z-index: 10;
+  }
+
+  .stoic-card::before, .stoic-card::after {
+      content: "";
+      position: absolute;
+      border-radius: inherit;
+      opacity: 0;
+      transition: opacity 500ms ease;
+      pointer-events: none;
+  }
+  .stoic-card::before {
+      inset: 0;
+      background: radial-gradient(600px circle at var(--mouse-x, -9999px) var(--mouse-y, -9999px), rgba(168, 85, 247, 0.08), transparent 40%);
+      z-index: 0;
+  }
+  .stoic-card::after {
+      inset: -1px;
+      background: radial-gradient(400px circle at var(--mouse-x, -9999px) var(--mouse-y, -9999px), rgba(168, 85, 247, 0.6), transparent 40%);
+      z-index: -1;
+  }
+  .stoic-card:hover::before, .stoic-card:hover::after { opacity: 1; }
+
+  .dashboard-shell {
+    position: relative;
+  }
+
+  .dashboard-shell::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 0% 0%, hsl(var(--primary) / 0.18), transparent 26%),
+      radial-gradient(circle at 100% 0%, hsl(var(--accent) / 0.12), transparent 24%);
+    opacity: 0.9;
+  }
+
+  .dark .dashboard-shell::before {
+    background:
+      radial-gradient(circle at 0% 0%, hsl(var(--primary) / 0.22), transparent 24%),
+      radial-gradient(circle at 100% 0%, hsl(var(--accent) / 0.1), transparent 24%),
+      radial-gradient(circle at 50% 100%, hsl(var(--primary) / 0.08), transparent 30%);
+  }
+
+  .dashboard-hero {
+    @apply relative overflow-hidden rounded-3xl border border-slate-200 dark:border-white/10 bg-white/60 dark:bg-[#131722]/80 backdrop-blur-2xl px-6 py-7 sm:px-8 shadow-2xl;
+    z-index: 10;
+  }
+
+  .dashboard-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(circle at top left, rgba(168, 85, 247, 0.15), transparent 40%),
+                radial-gradient(circle at bottom right, rgba(216, 180, 254, 0.1), transparent 30%);
+  }
+
+  .dark .glass-panel {
+    background: linear-gradient(160deg, hsl(254 22% 16% / 0.72), hsl(244 24% 10% / 0.82));
+    border-color: hsl(var(--primary) / 0.16);
+  }
+
+  .glass-panel {
+    @apply rounded-2xl border border-border/70 bg-card/60;
+    backdrop-filter: blur(16px);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .sidebar-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--sidebar-border)) transparent;
+  }
+
+  /* Global Aria UI Glow Card & Noise Background */
+  .noise-bg {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="0.04"/%3E%3C/svg%3E');
+    pointer-events: none;
+    z-index: 50;
+  }
+
+  .glow-card { position: relative; }
+  .glow-card::before, .glow-card::after {
+      content: "";
+      position: absolute;
+      border-radius: inherit;
+      opacity: 0;
+      transition: opacity 500ms ease;
+      pointer-events: none;
+  }
+  .glow-card::before {
+      inset: 0;
+      background: radial-gradient(600px circle at var(--mouse-x, -9999px) var(--mouse-y, -9999px), rgba(168, 85, 247, 0.08), transparent 40%);
+      z-index: 0;
+  }
+  .glow-card::after {
+      inset: -1px;
+      background: radial-gradient(400px circle at var(--mouse-x, -9999px) var(--mouse-y, -9999px), rgba(168, 85, 247, 0.6), transparent 40%);
+      z-index: -1;
+  }
+  .glow-card:hover::before, .glow-card:hover::after { opacity: 1; }
+
+  .sidebar-scrollbar::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  .sidebar-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .sidebar-scrollbar::-webkit-scrollbar-thumb {
+    background: linear-gradient(
+      180deg,
+      hsl(var(--sidebar-accent)),
+      hsl(var(--sidebar-border))
+    );
+    border: 2px solid transparent;
+    border-radius: 9999px;
+    background-clip: padding-box;
+  }
+
+  .sidebar-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(
+      180deg,
+      hsl(var(--sidebar-primary) / 0.7),
+      hsl(var(--sidebar-border))
+    );
+    border: 2px solid transparent;
+    background-clip: padding-box;
   }
 
   .stoic-input {
@@ -163,6 +363,27 @@
 
   .stoic-glow:hover::before {
     opacity: 0.5;
+  }
+
+  .emoji-render {
+    font-family: 'Poppins', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji', sans-serif;
+    font-variant-emoji: emoji;
+  }
+
+  .chat-message-content,
+  .chat-message-content * {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .chat-message-content img,
+  .chat-message-content video,
+  .chat-message-content canvas,
+  .chat-message-content iframe {
+    display: block;
+    max-width: 100%;
+    height: auto;
   }
 }
 
@@ -213,5 +434,20 @@
   }
   50% {
     box-shadow: 0 0 40px hsl(270 60% 50% / 0.5);
+  }
+}
+
+@keyframes splashbar {
+  0% {
+    transform: translateX(-35%);
+    opacity: 0.65;
+  }
+  50% {
+    transform: translateX(35%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(110%);
+    opacity: 0.65;
   }
 }

@@ -3,6 +3,16 @@ import * as AvatarPrimitive from "@radix-ui/react-avatar";
 
 import { cn } from "@/lib/utils";
 
+const isUnsupportedAvatarSource = (src: string) => {
+  try {
+    const url = new URL(src);
+    const host = url.hostname.toLowerCase();
+    return host === "styles.redditmedia.com";
+  } catch {
+    return false;
+  }
+};
+
 const Avatar = React.forwardRef<
   React.ElementRef<typeof AvatarPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Root>
@@ -18,9 +28,31 @@ Avatar.displayName = AvatarPrimitive.Root.displayName;
 const AvatarImage = React.forwardRef<
   React.ElementRef<typeof AvatarPrimitive.Image>,
   React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Image>
->(({ className, ...props }, ref) => (
-  <AvatarPrimitive.Image ref={ref} className={cn("aspect-square h-full w-full", className)} {...props} />
-));
+>(({ className, src, onError, ...props }, ref) => {
+  const [failed, setFailed] = React.useState(false);
+  const shouldSkip = typeof src === "string" && isUnsupportedAvatarSource(src);
+
+  React.useEffect(() => {
+    setFailed(false);
+  }, [src]);
+
+  if (!src || failed || shouldSkip) {
+    return null;
+  }
+
+  return (
+    <AvatarPrimitive.Image
+      ref={ref}
+      src={src}
+      className={cn("aspect-square h-full w-full", className)}
+      onError={(event) => {
+        setFailed(true);
+        onError?.(event);
+      }}
+      {...props}
+    />
+  );
+});
 AvatarImage.displayName = AvatarPrimitive.Image.displayName;
 
 const AvatarFallback = React.forwardRef<

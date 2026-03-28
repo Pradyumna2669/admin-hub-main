@@ -44,6 +44,87 @@ export type Database = {
         }
         Relationships: []
       }
+      active_user_sessions: {
+        Row: {
+          device_label: string | null
+          issued_at: number
+          seen_at: string
+          session_id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          device_label?: string | null
+          issued_at: number
+          seen_at?: string
+          session_id: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          device_label?: string | null
+          issued_at?: number
+          seen_at?: string
+          session_id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      categories: {
+        Row: {
+          claim_cooldown_minutes: number | null
+          id: string
+          name: string
+          description: string | null
+          created_by: string | null
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          claim_cooldown_minutes?: number | null
+          id?: string
+          name: string
+          description?: string | null
+          created_by?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          claim_cooldown_minutes?: number | null
+          id?: string
+          name?: string
+          description?: string | null
+          created_by?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      category_assignments: {
+        Row: {
+          id: string
+          category_id: string
+          client_user_id: string
+          assigned_by: string | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          category_id: string
+          client_user_id: string
+          assigned_by?: string | null
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          category_id?: string
+          client_user_id?: string
+          assigned_by?: string | null
+          created_at?: string
+        }
+        Relationships: []
+      }
       links: {
         Row: {
           created_at: string
@@ -77,75 +158,252 @@ export type Database = {
       profiles: {
         Row: {
           avatar_url: string | null
+          banned_at: string | null
+          banned_by: string | null
+          banned_reason: string | null
+          cqs: string | null
+          cqs_proof: string | null
           created_at: string
           email: string
           full_name: string | null
+          is_banned: boolean
+          is_verified: boolean | null
+          karma: number | null
+          karma_range: string | null
+          league: string | null
+          reddit_username: string | null
+          reddit_data: Json | null
+          reddit_profile: string | null
           id: string
           updated_at: string
+          upi_id: string | null
           user_id: string
+          whatsapp_last_verified_at: string | null
+          whatsapp_opt_in: boolean
+          whatsapp_phone_e164: string | null
         }
         Insert: {
           avatar_url?: string | null
+          banned_at?: string | null
+          banned_by?: string | null
+          banned_reason?: string | null
+          cqs?: string | null
+          cqs_proof?: string | null
           created_at?: string
           email: string
           full_name?: string | null
+          is_banned?: boolean
+          is_verified?: boolean | null
+          karma?: number | null
+          karma_range?: string | null
+          league?: string | null
+          reddit_username?: string | null
+          reddit_data?: Json | null
+          reddit_profile?: string | null
           id?: string
           updated_at?: string
+          upi_id?: string | null
           user_id: string
+          whatsapp_last_verified_at?: string | null
+          whatsapp_opt_in?: boolean
+          whatsapp_phone_e164?: string | null
         }
         Update: {
           avatar_url?: string | null
+          banned_at?: string | null
+          banned_by?: string | null
+          banned_reason?: string | null
+          cqs?: string | null
+          cqs_proof?: string | null
           created_at?: string
           email?: string
           full_name?: string | null
+          is_banned?: boolean
+          is_verified?: boolean | null
+          karma?: number | null
+          karma_range?: string | null
+          league?: string | null
+          reddit_username?: string | null
+          reddit_data?: Json | null
+          reddit_profile?: string | null
           id?: string
           updated_at?: string
+          upi_id?: string | null
           user_id?: string
+          whatsapp_last_verified_at?: string | null
+          whatsapp_opt_in?: boolean
+          whatsapp_phone_e164?: string | null
         }
         Relationships: []
       }
       tasks: {
         Row: {
           ai_generated: boolean | null
+          amount: number | null
           assigned_to: string | null
+          category_id: string | null
           content: string | null
           created_at: string
           created_by: string | null
           id: string
+          instruction: string | null
           status: Database["public"]["Enums"]["task_status"]
+          public_order_code: string
           subreddit_flair: string | null
           target_link: string | null
+          task_completion_time: number | null
           task_type: Database["public"]["Enums"]["task_type"]
           title: string
           updated_at: string
         }
         Insert: {
           ai_generated?: boolean | null
+          amount?: number | null
           assigned_to?: string | null
+          category_id?: string | null
           content?: string | null
           created_at?: string
           created_by?: string | null
           id?: string
+          instruction?: string | null
+          public_order_code?: string
           status?: Database["public"]["Enums"]["task_status"]
           subreddit_flair?: string | null
           target_link?: string | null
+          task_completion_time?: number | null
           task_type?: Database["public"]["Enums"]["task_type"]
           title: string
           updated_at?: string
         }
         Update: {
           ai_generated?: boolean | null
+          amount?: number | null
           assigned_to?: string | null
+          category_id?: string | null
           content?: string | null
           created_at?: string
           created_by?: string | null
           id?: string
+          instruction?: string | null
+          public_order_code?: string
           status?: Database["public"]["Enums"]["task_status"]
           subreddit_flair?: string | null
           target_link?: string | null
+          task_completion_time?: number | null
           task_type?: Database["public"]["Enums"]["task_type"]
           title?: string
           updated_at?: string
+        }
+        Relationships: []
+      }
+      chat_reads: {
+        Row: {
+          peer_id: string
+          reader_id: string
+          last_read_at: string
+          updated_at: string
+        }
+        Insert: {
+          peer_id: string
+          reader_id: string
+          last_read_at?: string
+          updated_at?: string
+        }
+        Update: {
+          peer_id?: string
+          reader_id?: string
+          last_read_at?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      task_type_rates: {
+        Row: {
+          league: string
+          task_type: Database["public"]["Enums"]["task_type"]
+          amount: number
+          removal_amount: number
+          updated_at: string
+          updated_by: string | null
+        }
+        Insert: {
+          league: string
+          task_type: Database["public"]["Enums"]["task_type"]
+          amount: number
+          removal_amount: number
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Update: {
+          league?: string
+          task_type?: Database["public"]["Enums"]["task_type"]
+          amount?: number
+          removal_amount?: number
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Relationships: []
+      }
+      task_assignments: {
+        Row: {
+          id: string
+          task_id: string
+          user_id: string
+          amount: number | null
+          payment_status: Database["public"]["Enums"]["payment_status"]
+          status: Database["public"]["Enums"]["task_status"]
+          submitted_at: string | null
+          submitted_url: string | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          task_id: string
+          user_id: string
+          amount?: number | null
+          payment_status?: Database["public"]["Enums"]["payment_status"]
+          status?: Database["public"]["Enums"]["task_status"]
+          submitted_at?: string | null
+          submitted_url?: string | null
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          task_id?: string
+          user_id?: string
+          amount?: number | null
+          payment_status?: Database["public"]["Enums"]["payment_status"]
+          status?: Database["public"]["Enums"]["task_status"]
+          submitted_at?: string | null
+          submitted_url?: string | null
+          created_at?: string
+        }
+        Relationships: []
+      }
+      task_items: {
+        Row: {
+          id: string
+          task_id: string
+          description: string
+          quantity: number
+          target_link: string | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          task_id: string
+          description: string
+          quantity?: number
+          target_link?: string | null
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          task_id?: string
+          description?: string
+          quantity?: number
+          target_link?: string | null
+          created_at?: string
         }
         Relationships: []
       }
@@ -188,9 +446,20 @@ export type Database = {
       }
     }
     Enums: {
-      app_role: "admin" | "client"
-      task_status: "pending" | "in_progress" | "completed" | "cancelled"
-      task_type: "comment" | "linked_comment" | "linked_post" | "normal_post"
+      app_role: "admin" | "client" | "worker" | "owner" | "moderator"
+      payment_status: "pending" | "processing" | "paid" | "failed" | "cancelled"
+        task_status: "pending" | "in_progress" | "submitted" | "completed" | "cancelled"
+      task_type:
+        | "comment"
+        | "linked_comment"
+        | "linked_post"
+        | "normal_post"
+        | "normal_comment"
+        | "support_comment"
+        | "linked_comments"
+        | "non_linked_crosspost"
+        | "linked_post_crosspost"
+        | "non_linked_post"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -318,9 +587,20 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
-      app_role: ["admin", "client"],
-      task_status: ["pending", "in_progress", "completed", "cancelled"],
-      task_type: ["comment", "linked_comment", "linked_post", "normal_post"],
+      app_role: ["admin", "client", "worker", "owner", "moderator"],
+      task_status: ["pending", "in_progress", "submitted", "completed", "cancelled"],
+      task_type: [
+        "comment",
+        "linked_comment",
+        "linked_post",
+        "normal_post",
+        "normal_comment",
+        "support_comment",
+        "linked_comments",
+        "non_linked_crosspost",
+        "linked_post_crosspost",
+        "non_linked_post",
+      ],
     },
   },
 } as const

@@ -1,0 +1,2 @@
+-- No-op replacement: storage policies handled via Dashboard/UI.
+-- This migration intentionally left blank.

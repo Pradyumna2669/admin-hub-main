@@ -1,22 +1,16 @@
-# Welcome to your Lovable project
+# StoicOPS Admin Hub
 
 ## Project info
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+**URL**: (add your deployed URL here)
 
 ## How can I edit this code?
 
 There are several ways of editing your application.
 
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
 **Use your preferred IDE**
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+If you want to work locally using your own IDE, you can clone this repo and push changes.
 
 The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 
@@ -62,12 +56,111 @@ This project is built with:
 
 ## How can I deploy this project?
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+Deploy the static build output (typically `dist/`) to your hosting provider of choice.
 
-## Can I connect a custom domain to my Lovable project?
+## WhatsApp Order Bot
 
-Yes, you can!
+This repo now includes a Supabase Edge Function at `supabase/functions/whatsapp-order-bot` that lets clients ask WhatsApp for their order details.
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+### What it does
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+- Matches the incoming WhatsApp number against `profiles.whatsapp_phone_e164`
+- Only replies when `profiles.whatsapp_opt_in = true`
+- Returns recent orders for `orders`, `status`, or `hello`
+- Returns one specific order for messages like `order ORD-1234ABCD`
+- Uses `tasks.public_order_code` as the client-facing order reference
+
+### Required setup
+
+1. Apply the latest Supabase migration:
+
+```bash
+supabase db push
+```
+
+2. Deploy the function:
+
+```bash
+supabase functions deploy whatsapp-order-bot --no-verify-jwt
+```
+
+3. Set function secrets:
+
+```bash
+supabase secrets set WHATSAPP_VERIFY_TOKEN=your_verify_token
+supabase secrets set WHATSAPP_PHONE_NUMBER_ID=your_phone_number_id
+supabase secrets set WHATSAPP_ACCESS_TOKEN=your_meta_access_token
+supabase secrets set WHATSAPP_APP_SECRET=your_meta_app_secret
+supabase secrets set SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
+```
+
+4. In Meta WhatsApp Cloud API, point the webhook to:
+
+```text
+https://<your-project-ref>.supabase.co/functions/v1/whatsapp-order-bot
+```
+
+5. In the admin app, open `Clients`, save each client's WhatsApp number in E.164 format, and enable WhatsApp replies.
+
+### Client commands
+
+- `orders`
+- `status`
+- `order ORD-1234ABCD`
+- `help`
+
+## Arcade Survivor Mode
+
+The arcade now includes a low-resource multiplayer survival shooter built with:
+
+- HTML5 Canvas on the client
+- Socket.IO for realtime multiplayer
+- Node.js for the match server
+- SQLite via Node's built-in `node:sqlite` module for credits, wins, kills, and leaderboard persistence
+
+### Local run
+
+Start the React app and the arcade server in separate terminals:
+
+```bash
+npm install
+npm run dev
+npm run dev:arcade-server
+```
+
+The Vite dev server proxies:
+
+- `/api/arcade-survivor`
+- `/socket.io/arcade-survivor`
+
+If you host the arcade server on another origin, set `VITE_ARCADE_SURVIVOR_SERVER_URL` in your environment.
+
+## Seeding a Default Admin
+
+A migration has been added to create a table of initial admin emails and to grant the `admin` role to any user who signs up with one of those emails.
+
+- **Migration file:** supabase/migrations/20260110050000_seed_initial_admin.sql
+- **Default seeded email:** `admin@stoicops.com` (change this if you prefer a different address)
+
+How it works:
+
+- When a new user signs up, the signup trigger checks `public.initial_admins`.
+- If the signing-up user's email exists there, they receive the `admin` role; otherwise they get the `client` role.
+
+To change the seeded admin email, edit the migration file or run an SQL insert against your database:
+
+```sql
+INSERT INTO public.initial_admins (email) VALUES ('you@yourdomain.com');
+```
+
+To apply migrations locally or to your Supabase project, use the Supabase CLI. Example commands (adjust for your setup):
+
+```bash
+# start the local supabase stack (if using local development)
+supabase start
+
+# apply migrations to the target database
+supabase db push
+```
+
+After applying the migration, sign up in the app using the seeded admin email to get the admin role automatically.
